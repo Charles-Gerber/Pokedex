@@ -13,7 +13,9 @@ class PokeTable extends Component {
     return (
       <div>
         PokeTable
-        <PokeLine />
+        {this.state.pokemons.map(pokemon => (
+          <PokeLine key={pokemon.id} pokemon={pokemon} />
+        ))}
       </div>
     )
   }
