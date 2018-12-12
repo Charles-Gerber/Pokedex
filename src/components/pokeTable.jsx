@@ -5,7 +5,7 @@ class PokeTable extends Component {
   render() {
     return (
       <div>
-        PokeTable
+        Id Name Types Display
         {this.props.pokemons.map(pokemon => (
           <PokeLine key={pokemon.id} pokemon={pokemon} />
         ))}
