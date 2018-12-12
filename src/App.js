@@ -1,28 +1,20 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
+import { pokemon_list } from './assets/pokeList'
+import PokeTable from './components/pokeTable'
+import NavBar from './components/navBar'
+import PokePage from './components/pokePage'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <NavBar />
+        <PokePage />
+        <PokeTable mockPokeList={pokemon_list} />
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
