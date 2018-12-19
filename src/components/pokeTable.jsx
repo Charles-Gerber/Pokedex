@@ -7,7 +7,11 @@ class PokeTable extends Component {
       <div>
         Id Name Types Display
         {this.props.pokemons.map(pokemon => (
-          <PokeLine key={pokemon.id} pokemon={pokemon} />
+          <PokeLine
+            key={pokemon.id}
+            pokemon={pokemon}
+            onDisplay={this.props.onDisplay}
+          />
         ))}
       </div>
     )

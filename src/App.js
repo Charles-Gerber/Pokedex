@@ -53,6 +53,14 @@ class App extends Component {
     this.sortPokemons()
   }
 
+  handleDisplay = idPokemon => {
+    // TODO optimize
+    const pokemons = [...this.state.pokemons]
+    const seletedPokemon = pokemons.filter(pokemon => pokemon.id === idPokemon)
+    console.log(`display on ${seletedPokemon[0].name}`)
+    this.setState({ selectedPokemon: seletedPokemon[0] })
+  }
+
   render() {
     return (
       <div className="container">
@@ -67,7 +75,10 @@ class App extends Component {
             />
           </div>
           <div className="col-sm">
-            <PokeTable pokemons={this.state.pokemons} />
+            <PokeTable
+              pokemons={this.state.pokemons}
+              onDisplay={this.handleDisplay}
+            />
           </div>
         </div>
       </div>

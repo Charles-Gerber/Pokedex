@@ -12,6 +12,12 @@ class PokeLine extends Component {
       <div>
         {this.props.pokemon.id} {this.props.pokemon.name} {this.printTypes()}{' '}
         {this.props.pokemon.likes}
+        <button
+          className="btn btn-primary btn-sm"
+          onClick={() => this.props.onDisplay(this.props.pokemon.id)}
+        >
+          display
+        </button>
       </div>
     )
   }
