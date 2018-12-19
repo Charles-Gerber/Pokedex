@@ -4,15 +4,14 @@ class PokeLine extends Component {
   state = {}
 
   printTypes() {
-    console.log(`types to render : ${this.props.pokemon.types}`)
-
     return this.props.pokemon.types.map(type => `${type},`)
   }
 
   render() {
     return (
       <div>
-        {this.props.pokemon.id} {this.props.pokemon.name} {this.printTypes()}
+        {this.props.pokemon.id} {this.props.pokemon.name} {this.printTypes()}{' '}
+        {this.props.pokemon.likes}
       </div>
     )
   }

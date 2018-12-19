@@ -4,8 +4,6 @@ class PokePage extends Component {
   state = {}
 
   printTypes() {
-    console.log(`types to render : ${this.props.pokemon.types}`)
-
     return this.props.pokemon.types.map(type => `${type},`)
   }
 
@@ -15,6 +13,12 @@ class PokePage extends Component {
         {this.props.pokemon.id} {this.props.pokemon.name}
         <img src={this.props.pokemon.image} alt="image of the pokemon" />
         {this.printTypes()}
+        <button
+          className="btn btn-primary btn-sm"
+          onClick={() => this.props.onLike(this.props.pokemon.id)}
+        >
+          Like
+        </button>
       </div>
     )
   }
