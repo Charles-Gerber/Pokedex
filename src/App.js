@@ -24,7 +24,23 @@ class App extends Component {
         height: 60,
       },
     }
+    this.sortPokemons()
     console.log(this.state.pokemons)
+  }
+
+  sortPokemons() {
+    console.log('sorting pokemons')
+    const pokemons = [...this.state.pokemons]
+    pokemons.sort((a, b) => {
+      if (a.likes < b.likes) {
+        return 1
+      } else if (a.likes === b.likes) {
+        return 0
+      } else {
+        return -1
+      }
+    })
+    this.setState({ pokemons })
   }
 
   handleLike = idPokemon => {
@@ -34,6 +50,7 @@ class App extends Component {
     pokemonLiked[0].likes++
     console.log(`like on ${pokemonLiked[0].name}`)
     this.setState({ pokemons })
+    this.sortPokemons()
   }
 
   render() {
