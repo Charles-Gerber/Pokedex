@@ -27,10 +27,18 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <NavBar />
-        <PokePage pokemon={this.state.selectedPokemon} />
-        <PokeTable pokemons={this.state.pokemons} />
+      <div className="container">
+        <div className="row">
+          <NavBar />
+        </div>
+        <div className="row">
+          <div className="col-sm">
+            <PokePage pokemon={this.state.selectedPokemon} />
+          </div>
+          <div className="col-sm">
+            <PokeTable pokemons={this.state.pokemons} />
+          </div>
+        </div>
       </div>
     )
   }
