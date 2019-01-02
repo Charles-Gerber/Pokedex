@@ -20,6 +20,12 @@ class PokePage extends Component {
           >
             Like
           </button>
+          <button
+            className="btn btn-danger btn-sm"
+            onClick={() => this.props.onDelete(this.props.pokemon.id)}
+          >
+            Delete
+          </button>
         </div>
       )
     } else {

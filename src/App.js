@@ -44,6 +44,12 @@ class App extends Component {
     this.sortPokemons()
   }
 
+  handleDelete = idPokemon => {
+    const allPokemons = [...this.state.pokemons]
+    const pokemons = allPokemons.filter(pokemon => pokemon.id !== idPokemon)
+    this.setState({ pokemons, selectedPokemon: null })
+  }
+
   handleDisplay = async idPokemon => {
     try {
       const [pokemon, pokemonDetail] = await Promise.all([
@@ -67,6 +73,7 @@ class App extends Component {
             <PokePage
               pokemon={this.state.selectedPokemon}
               onLike={this.handleLike}
+              onDelete={this.handleDelete}
             />
           </div>
           <div className="col-sm">
