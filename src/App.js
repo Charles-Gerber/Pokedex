@@ -4,6 +4,8 @@ import { pokemon_list } from './assets/pokeList'
 import PokeTable from './components/pokeTable'
 import NavBar from './components/navBar'
 import PokePage from './components/pokePage'
+import Pokemon from './model/Pokemon'
+import axios from 'axios'
 
 class App extends Component {
   constructor(props) {
@@ -53,12 +55,16 @@ class App extends Component {
     this.sortPokemons()
   }
 
-  handleDisplay = idPokemon => {
-    // TODO optimize
-    const pokemons = [...this.state.pokemons]
-    const seletedPokemon = pokemons.filter(pokemon => pokemon.id === idPokemon)
-    console.log(`display on ${seletedPokemon[0].name}`)
-    this.setState({ selectedPokemon: seletedPokemon[0] })
+  handleDisplay = async idPokemon => {
+    try {
+      const [pokemon, pokemonDetail] = await Promise.all([
+        axios(`https://pokeapi.co/api/v2/pokemon/${idPokemon}/`),
+        axios(`https://pokeapi.co/api/v2/pokemon-species/${idPokemon}/`),
+      ])
+      this.setState({ selectedPokemon: new Pokemon(pokemon, pokemonDetail) })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   render() {
