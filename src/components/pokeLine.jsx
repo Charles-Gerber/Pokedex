@@ -9,16 +9,20 @@ class PokeLine extends Component {
 
   render() {
     return (
-      <div>
-        {this.props.pokemon.id} {this.props.pokemon.name} {this.printTypes()}{' '}
-        {this.props.pokemon.likes}
-        <button
-          className="btn btn-primary btn-sm"
-          onClick={() => this.props.onDisplay(this.props.pokemon.id)}
-        >
-          display
-        </button>
-      </div>
+      <tr>
+        <td>{this.props.pokemon.id} </td>
+        <td> {this.props.pokemon.name}</td>
+        <td>{this.printTypes()}</td>
+        <td>{this.props.pokemon.likes}</td>
+        <td>
+          <button
+            className="btn btn-primary btn-sm"
+            onClick={() => this.props.onDisplay(this.props.pokemon.id)}
+          >
+            display
+          </button>
+        </td>
+      </tr>
     )
   }
 }

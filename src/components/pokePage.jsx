@@ -8,19 +8,23 @@ class PokePage extends Component {
   }
 
   render() {
-    return (
-      <div className="card">
-        {this.props.pokemon.id} {this.props.pokemon.name}
-        <img src={this.props.pokemon.image} alt="image of the pokemon" />
-        {this.printTypes()}
-        <button
-          className="btn btn-primary btn-sm"
-          onClick={() => this.props.onLike(this.props.pokemon.id)}
-        >
-          Like
-        </button>
-      </div>
-    )
+    if (this.props.pokemon) {
+      return (
+        <div className="card">
+          {this.props.pokemon.id} {this.props.pokemon.name}
+          <img src={this.props.pokemon.image} alt="image of the pokemon" />
+          {this.printTypes()}
+          <button
+            className="btn btn-primary btn-sm"
+            onClick={() => this.props.onLike(this.props.pokemon.id)}
+          >
+            Like
+          </button>
+        </div>
+      )
+    } else {
+      return null
+    }
   }
 }
 
