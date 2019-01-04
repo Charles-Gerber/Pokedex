@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Loading from './common/loading'
 
 class PokePage extends Component {
   state = {}

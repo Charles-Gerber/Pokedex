@@ -6,14 +6,22 @@ import NavBar from './components/navBar'
 import PokePage from './components/pokePage'
 import Pokemon from './model/Pokemon'
 import axios from 'axios'
+import Loading from './components/common/loading'
 
 class App extends Component {
+  state = {
+    pokemons: undefined,
+    selectedPokemon: undefined,
+    loading: false,
+  }
+
   constructor(props) {
     super(props)
     const pokemons = pokemon_list
     pokemons.forEach(pokemon => (pokemon.likes = 0))
     this.state = {
       pokemons: pokemons,
+      loading: false,
     }
     this.sortPokemons()
     console.log(this.state.pokemons)
@@ -52,6 +60,7 @@ class App extends Component {
 
   handleDisplay = async idPokemon => {
     try {
+      this.setState({ loading: true })
       const [pokemon, pokemonDetail] = await Promise.all([
         axios(`https://pokeapi.co/api/v2/pokemon/${idPokemon}/`),
         axios(`https://pokeapi.co/api/v2/pokemon-species/${idPokemon}/`),
@@ -59,6 +68,8 @@ class App extends Component {
       this.setState({ selectedPokemon: new Pokemon(pokemon, pokemonDetail) })
     } catch (error) {
       console.log(error)
+    } finally {
+      this.setState({ loading: false })
     }
   }
 
@@ -70,11 +81,15 @@ class App extends Component {
         </div>
         <div className="row">
           <div className="col-sm">
-            <PokePage
-              pokemon={this.state.selectedPokemon}
-              onLike={this.handleLike}
-              onDelete={this.handleDelete}
-            />
+            {this.state.loading ? (
+              <Loading />
+            ) : (
+              <PokePage
+                pokemon={this.state.selectedPokemon}
+                onLike={this.handleLike}
+                onDelete={this.handleDelete}
+              />
+            )}
           </div>
           <div className="col-sm">
             <PokeTable
