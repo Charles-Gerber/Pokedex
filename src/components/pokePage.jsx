@@ -12,7 +12,7 @@ class PokePage extends Component {
       return (
         <div className="card">
           {this.props.pokemon.id} {this.props.pokemon.name}
-          <img src={this.props.pokemon.image} alt="image of the pokemon" />
+          <img src={this.props.pokemon.image} alt="The selected pokemon" />
           {this.printTypes()}
           <button
             className="btn btn-primary btn-sm"
