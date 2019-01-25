@@ -7,6 +7,7 @@ import PokePage from './components/pokePage'
 import Pokemon from './model/Pokemon'
 import axios from 'axios'
 import Loading from './components/common/loading'
+import fetch from 'node-fetch'
 
 class App extends Component {
   state = {
@@ -17,14 +18,26 @@ class App extends Component {
 
   constructor(props) {
     super(props)
-    const pokemons = pokemon_list
-    pokemons.forEach(pokemon => (pokemon.likes = 0))
     this.state = {
-      pokemons: pokemons,
-      loading: false,
+      pokemons: [],
+      loading: true,
     }
-    this.sortPokemons()
-    console.log(this.state.pokemons)
+    fetch(`https://localhost/pokedex-service/v1/pokemons`, {
+      method: 'GET',
+      // mode: 'no-cors',
+      // header: { 'Access-Control-Allow-Origin': '*' },
+    })
+      .then(response => response.json())
+      .then(pokemons => {
+        console.log(pokemons)
+        this.state = {
+          pokemons: pokemons,
+          loading: false,
+        }
+        this.sortPokemons()
+        console.log(this.state.pokemons)
+      })
+    console.log('init finish')
   }
 
   sortPokemons() {
@@ -61,11 +74,15 @@ class App extends Component {
   handleDisplay = async idPokemon => {
     try {
       this.setState({ loading: true })
-      const [pokemon, pokemonDetail] = await Promise.all([
-        axios(`https://pokeapi.co/api/v2/pokemon/${idPokemon}/`),
-        axios(`https://pokeapi.co/api/v2/pokemon-species/${idPokemon}/`),
-      ])
-      this.setState({ selectedPokemon: new Pokemon(pokemon, pokemonDetail) })
+      const selectedPokemonResponse = await axios(
+        `https://localhost/pokedex-service/v1/pokemons/${idPokemon}/`
+      )
+      console.log(
+        `pokemonDetail response: ${JSON.stringify(
+          selectedPokemonResponse.data
+        )}`
+      )
+      this.setState({ selectedPokemon: selectedPokemonResponse.data })
     } catch (error) {
       console.log(error)
     } finally {
