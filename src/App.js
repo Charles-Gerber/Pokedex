@@ -20,22 +20,16 @@ class App extends Component {
     super(props)
     this.state = {
       pokemons: [],
-      loading: true,
     }
     fetch(`https://localhost/pokedex-service/v1/pokemons`, {
       method: 'GET',
-      // mode: 'no-cors',
-      // header: { 'Access-Control-Allow-Origin': '*' },
     })
       .then(response => response.json())
       .then(pokemons => {
-        console.log(pokemons)
         this.state = {
           pokemons: pokemons,
-          loading: false,
         }
         this.sortPokemons()
-        console.log(this.state.pokemons)
       })
     console.log('init finish')
   }
